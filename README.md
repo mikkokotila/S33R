@@ -19,4 +19,4 @@ This should result in a browser window opening with a result for 'fortune.com'.
 
 ### SCREENSHOTS
 
-![alt tag](https://s4.postimg.org/6qtx7e57x/screen1.jpg)
+![alt tag](https://s4.postimg.org/6qtx7e57x/screen1.jpg =250x)
