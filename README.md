@@ -17,24 +17,6 @@ Before using s33r, you also have to have a PHP server running. In the program ro
 
 This should result in a browser window opening with a result for 'fortune.com'. 
 
+### SCREENSHOTS
 
-
-
-
-
-#!/bin/bash
-
-cd ~/downloads/index/test
-
-STATUS=$(ps ax | grep "php -S 127.0.0.1:80" | grep -v grep)
-
-if [ -z "$STATUS" ]
-	then 	
-		tmux new-session -d -s my_session 'sudo php -S 127.0.0.1:80'
-fi
-
-	./bin/seer.sh $DOMAIN
-	./bin/cms-dashboard.sh > dash.html
-	./bin/cms-report.sh > report.html
-
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --app="http://127.0.0.1/dash.html" --window-size="1000x800"
+![alt tag](https://s4.postimg.org/6qtx7e57x/screen1.jpg)
