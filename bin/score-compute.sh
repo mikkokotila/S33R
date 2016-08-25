@@ -48,9 +48,9 @@ score_topkeywords(){
 
 score_trust(){
 
-	if [ -n "$WOT_TRUST" ] 
+	if [ -n "$WO_TRUST" ] 
 		then
-			TEMP_TRUST=$(echo $WOT_TRUST | tr ' ' '\n' | head -1)	
+			TEMP_TRUST=$(echo $WO_TRUST | cut -d ',' -f1)	
 			TRESHOLD=50; if [ $TEMP_TRUST -gt $TRESHOLD ]; then SCORE_TRUST="false" && CHECK_FALSE=$(($CHECK_FALSE+1)); else SCORE_TRUST="true" && CHECK_TRUE=$(($CHECK_TRUE+1)); fi
 		fi
 }
@@ -82,6 +82,8 @@ score_checks(){
 	TRESHOLD=4; if [ $CHECKS_TOTAL -lt $TRESHOLD ]; then SCORE_CHECKS="true" && CHECK_TRUE=$(($CHECK_TRUE+1)); else SCORE_CHECKS="false" && CHECK_FALSE=$(($CHECK_FALSE+1)); fi
 }
 	
+	TOP5_UPSTREAM=$(echo -e "scale=2; ($ALEXA_UPSTREAM1 + $ALEXA_UPSTREAM2 + $ALEXA_UPSTREAM3 + $ALEXA_UPSTREAM4)" | sed 's/%//g' | bc -l); echo -e "TOP5_UPSTREAM=$TOP5_UPSTREAM" >> env.bash
+	
 	score_bouncerate
 	score_privacy
 	score_years
@@ -108,25 +110,4 @@ score_checks(){
 	echo -e "CHECK_TRUE=$CHECK_TRUE" >> env.bash
 	echo -e "CHECK_FALSE=$CHECK_FALSE" >> env.bash
 
-	# SUSCORE=$(echo -e "$CHECK_TRUE out of $CHECKS_TOTAL checks failed"); echo -e "SUSCORE=("$SUSCORE")" >> env.bash
-	TOP5_UPSTREAM=$(echo -e "scale=2; ($ALEXA_UPSTREAM1 + $ALEXA_UPSTREAM2 + $ALEXA_UPSTREAM3 + $ALEXA_UPSTREAM4)" | sed 's/%//g' | bc -l); echo -e "TOP5_UPSTREAM=$TOP5_UPSTREAM" >> env.bash
-
-#	median(){
-#	awk ' { a[i++]=$1; } END { print a[int(i/2)]; }'
-#}
-	#AVG_YEARS=$(cut -d ',' -f2 $DB | median)
-	#AVG_INLINKS=$(cut -d ',' -f5 $DB | median)
-	#AVG_TIMEONSITE=$(cut -d ',' -f6 $DB | median)
-	#AVG_PAGEVIEWS=$(cut -d ',' -f7 $DB | median)
-	#AVG_BOUNCEALEXA=$(cut -d ',' -f8 $DB | median)
-	#AVG_BOUNCESW=$(cut -d ',' -f9 $DB | median)
-	#AVG_SEARCHALEXA=$(cut -d ',' -f10 $DB | median)
-	#AVG_SEARCHSW=$(cut -d ',' -f11 $DB | median)
-	#AVG_TOPKEYWORDS=$(cut -d ',' -f12 $DB | median)
-	#AVG_ORGANICSEARCH=$(cut -d ',' -f13 $DB | median)
-	#AVG_PAIDSEARCH=$(cut -d ',' -f14 $DB | median)
-	#AVG_WOTVOTES=$(cut -d ',' -f15 $DB | median)
-	#AVG_TRUST=$(cut -d ',' -f16 $DB | median)
-	#AVG_CHILDSAFETY=$(cut -d ',' -f17 $DB | median)
-
-	# INDEX_TRUST=$(echo -e "scale=2; l(l($TRUST * $VOTES) * $TRUST)^2" | bc -l)
+	

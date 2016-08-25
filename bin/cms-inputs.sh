@@ -11,9 +11,9 @@ taxonomy(){
 	echo -e "6~Average time on site~"$ALEXA_TIMEONSITE"~Alexa"
 	echo -e "7~Average pageviews~"$ALEXA_PAGEVIEWS"~Alexa"
 	echo -e "8~Bouncerate~"$ALEXA_BOUNCERATE"~Alexa"
-	echo -e "9~Bouncerate~"$SW_BOUNCE"~Similarweb"
+	echo -e "9~Bouncerate~"$SW_ENGAGEMENTS"~Similarweb"
 	echo -e "10~% share of search visits~"$ALEXA_SEARCHVISITS"~Alexa"
-	echo -e "11~% share of search visits~"$SW_SEARCH"~Similarweb"
+	echo -e "11~% share of search visits~"$SW_TRAFFICSOURCES"~Similarweb"
 	echo -e "12~top5 keywords' share of all search traffic~"$ALEXA_TOPKEYWORDS"~Alexa (computed)"
 	echo -e "13~organic search traffic's share of all search~"$SW_ORGANICSEARCH"~Similarweb"
 	echo -e "14~paid search traffic's share of all search~"$SW_PAIDSEARCH"~Similarweb"
@@ -43,14 +43,14 @@ create_row(){
 }
 
 domain(){
-	echo -e "            <div class='"col-sm-4 placeholder"'>"
+	echo -e "            <div class='"col-xs-4 col-sm-3 placeholder"'>"
 	echo -e "          <h2>"$DOMAIN"</h2>"
 	echo -e "              <span class="text-muted"><a href=http://"$DOMAIN" target="_blank">visit site</a></span>"
 	echo -e "            </div>"
 }
 
 scoring(){
-	echo -e "            <div class='"col-sm-4 placeholder"'>"
+	echo -e "            <div class='"col-sm-5 placeholder"'>"
 	SCORING=$(echo -e "scale=2; 1 - ($CHECK_TRUE / $CHECKS_TOTAL)" | bc -l | sed 's/.//' | sed 's/.00/100/')
 	echo -e "				<h1>"$SCORING"</h1>"
 }
@@ -73,42 +73,39 @@ scoring_reference(){
 
 	if [ $SCORING -le $ZEROZEROFOUR ]
 		then
-			echo -e "            <div class='"col-sm-4 placeholder"'>"
 			echo -e "   		<div class="holder-image"><img class="meter-image" src="./graphics/004.jpeg"></div>"
 			echo -e "              <span class="text-muted">not safe to buy</span></div>"
 		elif [ $SCORING -ge $ZEROZEROONE ]
 			then
-			echo -e "            <div class='"col-sm-4 placeholder"'>"
 			echo -e "   		<div class="holder-image"><img class="meter-image" src="./graphics/001.jpeg"></div>"
 			echo -e "              <span class="text-muted">may be safe to buy</span>"
 		elif [ $SCORING -ge $ZEROZEROTWO ]
 			then
-			echo -e "            <div class='"col-sm-4 placeholder"'>"
 			echo -e "   		<div class="holder-image"><img class="meter-image" src="./graphics/002.jpeg"></div>"
 			echo -e "             <span class="text-muted">likely to have issues</span>"
 		elif [ $SCORING -ge $ZEROZEROTHREE ]
 			then
-			echo -e "            <div class='"col-sm-4 placeholder"'>"
 			echo -e "   		<div class="holder-image"><img class="meter-image" src="./graphics/003.jpeg"></div>"
 			echo -e "              <span class="text-muted">high risk</span>"
 		fi 
 
 	echo -e "            </div>"	
 	echo -e "          </div>"
-	echo -e "		 </div>"
+	echo -e "         </div>"
 
 }
 
 main_content(){
-	echo -e "          <div class="table-responsive">"
-	echo -e "            <table class='"table table-striped"'>"
+	echo -e "				<div class='col-md-offset-2 main'>"
+	echo -e "				<div class="row">"
+	echo -e "				<div class="col-sm-12">"
+	echo -e "				<table class='table table-striped'>"
 	echo -e "              <thead>"
 	echo -e "                <tr>"
 	echo -e "                  <th widht="3%">ID</th>"
 	echo -e "                  <th widht="20%">Item</th>"
 	echo -e "                  <th>Value</th>"
-	echo -e "                  <th widht="15%">Source</th>"
-
+	echo -e "                  <th>Source</th>"
 	echo -e "                </tr>"
 	echo -e "              </thead>"
 	echo -e "              <tbody>"

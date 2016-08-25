@@ -29,7 +29,7 @@ create_row(){
 }
 
 domain(){
-	echo -e "            <div class='"col-xs-6 col-sm-3 placeholder"'>"
+	echo -e "            <div class='"col-xs-4 col-sm-3 placeholder"'>"
 	echo -e "          <h2>"$DOMAIN"</h2>"
 	echo -e "              <span class="text-muted"><a href=http://"$DOMAIN" target="_blank">visit site</a></span>"
 	echo -e "            </div>"
@@ -77,12 +77,15 @@ scoring_reference(){
 
 	echo -e "            </div>"	
 	echo -e "          </div>"
+	echo -e "         </div>"
 
 }
 
 main_content(){
-	echo -e "          <div class="table-responsive">"
-	echo -e "            <table class='"table table-striped"'>"
+	echo -e "				<div class='col-md-offset-2 main'>"
+	echo -e "				<div class="row">"
+	echo -e "				<div class="col-sm-12">"
+	echo -e "				<table class='table table-striped'>"
 	echo -e "              <tbody>"
 
 while read FLAG
